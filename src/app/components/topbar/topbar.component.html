@@ -1,0 +1,21 @@
+<div class="topbar">
+    <div class="title-section">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="alarm"></mat-icon>
+        <span class="title">Timesheet</span>
+    </div>
+    <div class="actions-section row">
+        <div class="col" *ngFor="let menuItem of menuService.menuItemsList">
+            <button 
+                #menu
+                class="btn btn-nav" 
+                (click)="menuService.togglePage(menu)" 
+                [class.active]="menu === menuService.activeButton" 
+                [routerLink]="[menuItem.link]"
+                [id]="menuItem.id"
+            >
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon={{menuItem.icon}} />
+                {{ menuItem.name }}
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+.block-title {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.fullWidth {
+    margin: 1rem;
+    display: flex;
+    // align-items: center;
+    justify-content: space-evenly;
+    // background-color: red;
+    mat-form-field {
+        width: 100%;
+        margin-right: 1rem;
+    }
+
+    button {
+        margin-top: .5rem;
+    }
+}

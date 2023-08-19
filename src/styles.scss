@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Lisu+Bosa&family=Roboto+Slab&family=Ruwudu&display=swap');
+
+html, body { 
+    height: 100%; 
+}
+
+body {
+    margin: 0; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Lisu Bosa', serif;
+    background-image: url('./assets/images/timesheet-bg.jpg');
+    min-height: 100vh;
+    display: grid;
+    align-items: center;
+}
+
+main {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+    box-shadow: 10px 10px 5px 0px rgba(87,87,87,0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(87,87,87,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(87,87,87,0.75);
+    border-radius: 6px;
+}
+
+.container-main {
+    min-height: 400px;
+    padding: 2rem 3rem;
+}

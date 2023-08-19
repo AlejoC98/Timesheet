@@ -1,0 +1,23 @@
+<div>
+    <div class="block-title">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="chevron_left" />
+        Timesheet works!!! {{ department!.name }}
+    </div>
+    <div class="fullWidth">
+        <mat-form-field>
+            <input matInput [formControl]="employeeNameFc" placeholder="Employee Name" type="text">
+            <mat-error *ngIf="employeeNameFc.hasError('duplicate')">Duplicate Name</mat-error>
+        </mat-form-field>
+        <button 
+            mat-mini-fab 
+            color="primary" 
+            (click)="addEmployee()" 
+            [disabled]="employeeNameFc.invalid"
+        >
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <div class="employees">
+        {{ employees | json}}
+    </div>
+</div>
