@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Employee } from 'src/app/interfaces/employee';
+import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: 'app-analytics-table',
@@ -14,7 +15,7 @@ export class AnalyticsTableComponent implements OnInit {
   weekdays: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   employeeData: Employee[] = [
       {
-          id: 1,
+          id: '1',
           departmentId: 1,
           name: 'a',
           payRate: 70,
@@ -27,7 +28,7 @@ export class AnalyticsTableComponent implements OnInit {
           Sunday: 6,
       },
       {
-          id: 2,
+          id: '2',
           departmentId: 1,
           name: 'b',
           payRate: 63,
@@ -40,7 +41,7 @@ export class AnalyticsTableComponent implements OnInit {
           Sunday: 2,
       },
       {
-          id: 3,
+          id: '3',
           departmentId: 2,
           name: 'c',
           payRate: 76,
@@ -53,7 +54,7 @@ export class AnalyticsTableComponent implements OnInit {
           Sunday: 5,
       },
       {
-          id: 4,
+          id: '4',
           departmentId: 3,
           name: 'd',
           payRate: 56,
@@ -67,10 +68,13 @@ export class AnalyticsTableComponent implements OnInit {
       }
   ];
 
-  constructor() {}
+  constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
-    this.employees = this.employeeData.filter(e => e.departmentId === this.departmentId);
+    // this.employees = this.employeeData.filter(e => e.departmentId === this.departmentId);
+    this.employeeService.getEmployeeHoursByDepartment(this.departmentId!).subscribe((employees: Employee[]) => {
+      this.employees = employees;
+    })
   }
 
   getTotalHours(employee: Employee): number {

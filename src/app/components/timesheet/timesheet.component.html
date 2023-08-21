@@ -41,7 +41,7 @@
                     {{ employee['Monday'] + employee['Tuesday'] + employee['Wednesday'] + employee['Thursday'] + employee['Friday'] + employee['Saturday'] + employee['Sunday'] }}
                 </td>
                 <td>
-                    <button mat-icon-button aria-label="Remove" class="btn btn-error" (click)="deleteEmployee(i)">
+                    <button mat-icon-button aria-label="Remove" class="btn btn-error" (click)="deleteEmployee(employee, i)">
                         <mat-icon>delete</mat-icon>
                       </button>
                 </td>
