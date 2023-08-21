@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Department } from 'src/app/interfaces/department';
 import { DepartmentsService } from 'src/app/services/departments.service';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { Employee } from 'src/app/interfaces/employee';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-timesheet',
@@ -12,33 +14,48 @@ import { Employee } from 'src/app/interfaces/employee';
 })
 export class TimesheetComponent implements OnInit {
 
-  departments: Department[] | undefined;
+  $departments: Observable<Department[]> | undefined;
   department: Department | undefined;
   employeeNameFc = new FormControl('', this.nameValidator());
   employees: Employee[] = [];
-  employeeId = 0;
+  weekdays: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   constructor(
     private route: ActivatedRoute,
     private departmentsService: DepartmentsService,
+    private employeeService: EmployeeService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.departments = this.departmentsService.departments;
-    this.department = this.departments.find(
-      department => department.id === Number(this.route.snapshot.params['id'])
+    this.$departments = this.departmentsService.getDepartments().pipe(
+      map(departments => departments.map(item => ({
+          id: Number(item.id),
+          name: item.name
+        }))
+      )
     );
+    
+    this.$departments.subscribe(x => {
+      this.department = x.find(dept => dept.id === Number(this.route.snapshot.params['id']))
+    });
   }
 
   addEmployee(): void {
     if (this.employeeNameFc.value) {
-      this.employeeId++;
 
       this.employees.push({
-        id: this.employeeId,
+
         departmentId: this.department?.id,
         name: this.employeeNameFc.value,
         payRate: Math.floor(Math.random() * 50) + 50,
+        Monday: 0,
+        Tuesday: 0,
+        Wednesday: 0,
+        Thursday: 0,
+        Friday: 0,
+        Saturday: 0,
+        Sunday: 0,
       });
     }
 
@@ -56,5 +73,17 @@ export class TimesheetComponent implements OnInit {
 
       return error;
     }
+  }
+
+  deleteEmployee(index: number): void {
+    this.employees.splice(index, 1);
+  }
+
+  submit(): void {
+    this.employees.forEach(employee => {
+      this.employeeService.saveEmployeeHours(employee);
+    });
+
+    this.router.navigate(['./departments']);
   }
 }

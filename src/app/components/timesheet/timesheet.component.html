@@ -1,7 +1,10 @@
-<div>
+<div class="add-container">
     <div class="block-title">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="chevron_left" />
-        Timesheet works!!! {{ department!.name }}
+        <!-- <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="chevron_left" /> -->
+        <button mat-icon-button aria-label="Back" [routerLink]="['/departments']">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+        <span>{{ department?.name }}</span>
     </div>
     <div class="fullWidth">
         <mat-form-field>
@@ -17,7 +20,33 @@
             <mat-icon>add</mat-icon>
         </button>
     </div>
-    <div class="employees">
-        {{ employees | json}}
-    </div>
+</div>
+<div class="hours-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th *ngFor="let day of weekdays">{{ day | titlecase }}</th>
+                <th>Total Hours</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees; let i = index">
+                <td>{{ employee.name }}</td>
+                <td *ngFor="let day of weekdays">
+                    <input type="number" [id]="day" [(ngModel)]="employee[day]" class="hours-field" />
+                </td>
+                <td>
+                    {{ employee['Monday'] + employee['Tuesday'] + employee['Wednesday'] + employee['Thursday'] + employee['Friday'] + employee['Saturday'] + employee['Sunday'] }}
+                </td>
+                <td>
+                    <button mat-icon-button aria-label="Remove" class="btn btn-error" (click)="deleteEmployee(i)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button mat-raised-button color="primary" class="btn btn-primary" (click)="submit()">Submit</button>
 </div>

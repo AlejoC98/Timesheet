@@ -15,21 +15,17 @@ body {
     background-image: url('./assets/images/timesheet-bg.jpg');
     min-height: 100vh;
     display: grid;
-    align-items: center;
+    place-items: center;
+    padding: 0 30px;
 }
 
 main {
-    width: 90%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 6px;
     background-color: #ffffff;
     box-shadow: 10px 10px 5px 0px rgba(87,87,87,0.75);
     -webkit-box-shadow: 10px 10px 5px 0px rgba(87,87,87,0.75);
     -moz-box-shadow: 10px 10px 5px 0px rgba(87,87,87,0.75);
-    border-radius: 6px;
-}
-
-.container-main {
-    min-height: 400px;
-    padding: 2rem 3rem;
 }

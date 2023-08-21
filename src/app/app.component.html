@@ -1,16 +1,6 @@
 <main>
   <app-topbar></app-topbar>
-  <div class="container container-main">
+  <div class="container-fluid container-main">
     <router-outlet></router-outlet>
   </div>
-  <!-- <div class="container container-main" [ngSwitch]="menuService.activeButton?.id">
-    <app-departments *ngSwitchCase="1">departments socio</app-departments>
-    <app-analytics *ngSwitchCase="3">analytics perra</app-analytics>
-    <app-departments *ngIf="menuService.activeButton!.id === '1'"></app-departments>
-    <app-timesheet *ngIf="menuService.activeButton!.id === '2'"></app-timesheet>
-    <app-analytics *ngIf="menuService.activeButton!.id === '3'"></app-analytics>
-    <div class="content">departments</div>
-    <div class="content">timesheet</div>
-    <div class="content">analytics</div>
-  </div> -->
 </main>
